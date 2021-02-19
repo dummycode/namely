@@ -1,0 +1,21 @@
+{
+  "app": {
+    "name": "Namely",
+    "desc": "Namely API",
+    "api": {
+      "version": "0.0.1"
+    }
+  },
+  "auth": {
+    "secret": "mysecretkey",
+    "timeout": 2592000
+  },
+  "database": {
+    "host": "127.0.0.1",
+    "username": "user",
+    "password": "password",
+    "database": "namely",
+    "port": 3306,
+    "dialect": "postgres"
+  }
+}

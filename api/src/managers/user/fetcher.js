@@ -8,7 +8,7 @@ const fetchAll = async () => {
 }
 
 const fetch = async (uuid) => {
-    const user = await User.findOne({ where: { uuid } });
+    const user = await User.findOne({ where: { userUuid: uuid } });
     if (user === null) {
         throw new UserNotFoundError();
     }

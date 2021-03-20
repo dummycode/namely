@@ -4,16 +4,17 @@ const responder = require('../../core/responder');
 const config = require('../../core/config');
 const userFetcher = require('../../managers/user/fetcher');
 const { UserNotFoundError } = require('../../core/errors');
+const utils = require('../../core/utils');
 
 exports.authenticate = (req, res, next) => {
-    const token = req.headers['x-access-token'];
+    const token = req.headers['secret-identity'];
     if (!token) {
         return responder.unauthorizedResponse(res, 'No token provided');
     }
 
     jwt.verify(token, config.get('auth.secret'), (jwtErr, decoded) => {
         if (jwtErr) {
-            console.log(jwtErr);
+            utils.logError({ jwtErr, message: jwtErr.message });
             return responder.unauthorizedResponse(res, 'Failed to authenticate token');
         }
 
@@ -28,7 +29,7 @@ exports.authenticate = (req, res, next) => {
                 case UserNotFoundError:
                     return responder.badRequestResponse(res, 'User not found');
                 default:
-                    console.log(err);
+                    utils.logError({ err, message: err.message });
                     return responder.ohShitResponse(res, 'Unknown error occurred');
                 }
             });

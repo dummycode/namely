@@ -37,7 +37,7 @@ const fetch = (req, res) => {
 
     userFetcher.fetch(req.params.uuid)
         .then((user) => {
-            responder.itemCreatedResponse(res, { data: userGoggles(user) });
+            responder.successResponse(res, userGoggles(user) );
         })
         .catch((err) => {
             switch (err.constructor) {

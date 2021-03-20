@@ -18,7 +18,7 @@ const login = async (username, password) => {
             }
 
             const token = jwt.sign(
-                { uuid: user.uuid },
+                { uuid: user.userUuid },
                 config.get('auth.secret'),
                 { expiresIn: config.get('auth.timeout') },
             );

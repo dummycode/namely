@@ -8,7 +8,7 @@ const {
 
 const sequelize = require('../../core/sequelize');
 
-class User extends Model {
+class Name extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -23,28 +23,25 @@ class User extends Model {
 
         this.removeAttribute('id');
 
-        this.addHook('beforeSave', async (user) => {
-            return user.user_uuid = uuidv4();
+        this.addHook('beforeSave', async (name) => {
+            return name.nameUuid = uuidv4();
         });
 
         return this;
     }
 };
 
-const user = User.init(
+const name = Name.init(
     {
-        userUuid: DataTypes.UUID,
-        username: DataTypes.STRING,
-        password: DataTypes.STRING,
-        email: DataTypes.STRING,
-        isAdmin: DataTypes.BOOLEAN,
+        nameUuid: DataTypes.UUID,
+        first: DataTypes.STRING,
+        last: DataTypes.STRING,
     },
     {
         sequelize,
-        modelName: 'User',
+        modelName: 'Name',
         paranoid: true,
     }
 );
 
-
-module.exports = user;
+module.exports = name;

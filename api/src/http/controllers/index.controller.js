@@ -33,10 +33,9 @@ const whoami = (req, res) => {
         return;
     }
 
-    userFetcher.fetch(req.body.user.id)
+    userFetcher.fetch(req.body.user.userUuid)
         .then((user) => {
-            const rawUser = user.get({ plain: true });
-            return responder.successResponse(res, userGoggles(rawUser));
+            return responder.successResponse(res, userGoggles(user));
         })
         .catch((err) => {
             switch (err.constructor) {
@@ -45,36 +44,7 @@ const whoami = (req, res) => {
                 return;
             default:
                 utils.logError(err);
-                responder.ohShitResponse(res, err);
-            }
-        });
-};
-
-const login = (req, res) => {
-    if (validationResult(req).errors.length !== 0) {
-        responder.badRequestResponse(
-            res,
-            'Invalid parameters',
-            validationResult(req).errors.map((error) => error.msg),
-        );
-        return;
-    }
-
-    const { username, password } = req.body;
-
-    auth.login(username, password)
-        .then((token) => {
-            responder.successResponse(res, { token }, 'Logged in');
-        })
-        .catch((err) => {
-            switch (err.constructor) {
-            case UserNotFoundError:
-            case InvalidPasswordError:
-                responder.unauthorizedResponse(res, 'Invalid login');
-                return;
-            default:
-                utils.logError(err);
-                responder.ohShitResponse(res, 'Unknown error occurred');
+                responder.ohShitResponse(res, "Eror fetching user from database");
             }
         });
 };
@@ -82,5 +52,4 @@ const login = (req, res) => {
 module.exports = {
     index,
     whoami,
-    login,
 };

@@ -36,6 +36,7 @@ const name = Name.init(
         nameUuid: DataTypes.UUID,
         first: DataTypes.STRING,
         last: DataTypes.STRING,
+        createdBy: DataTypes.UUID,
     },
     {
         sequelize,

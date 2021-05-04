@@ -9,8 +9,8 @@ const { validate } = require('../../controllers/validators/names.validator');
 const { authenticate } = require('../../middleware/auth.middleware');
 
 router.get('/', [authenticate], controller.index);
-router.get('/:id', [authenticate], controller.fetch);
+router.get('/:uuid', [authenticate, validate('fetch')], controller.fetch);
 router.post('/', [authenticate, validate('create')], controller.create);
-router.delete('/:id', [authenticate, validate('remove')], controller.remove);
+router.delete('/:uuid', [authenticate, validate('remove')], controller.remove);
 
 module.exports = router;

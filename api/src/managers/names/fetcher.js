@@ -3,20 +3,21 @@ const {
 } = require('../../core/errors');
 const Name = require('../../core/models/name');
 
-const fetchAll = async () => {
-    return Name.findAll();
+const fetchAllByUser = async (createdBy) => {
+    return Name.findAll({ where: { createdBy } });
 }
 
-const fetch = async (uuid) => {
-    const name = await Name.findOne({ where: { uuid } });
+const fetch = async (fetchNameRequest) => {
+    const { nameUuid, createdBy } = fetchNameRequest
+    const name = await Name.findOne({ where: { nameUuid, createdBy } });
     if (name === null) {
         throw new NameNotFoundError();
     }
 
-    return user;
+    return name;
 };
 
 module.exports = {
-    fetchAll,
+    fetchAllByUser,
     fetch,
 };

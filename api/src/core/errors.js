@@ -19,8 +19,9 @@ exports.FriendRequestNotFoundError = class FriendRequestNotFoundError extends Er
 exports.FriendRequestAlreadyExistsError = class FriendRequestAlreadyExistsError extends Error {};
 
 /**
- * Friend errors
+ * Name errors
  */
+exports.NameNotFoundError = class NameNotFoundError extends Error {};
 
 /**
  * Validation errors

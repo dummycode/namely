@@ -5,8 +5,8 @@ exports.validate = (method) => {
   switch (method) {
     case 'fetch': {
       return [
-        param('id', validationError('id', '`id` is required')).exists(),
-        param('id', validationError('id', '`id` must be an integer')).isInt(),
+        param('uuid', validationError('uuid', '`uuid` is required')).exists(),
+        param('uuid', validationError('uuid', '`uuid` must be an integer')).isUUID(),
       ]
     }
     case 'create': {

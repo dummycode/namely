@@ -12,6 +12,8 @@ const sequelize = new Sequelize(database, username, password, {
     dialect,
 });
 
+const { ErrorConnectingToDatabaseError } = require('./errors');
+
 async function testDatabaseConnection() {
     try {
         await sequelize.authenticate();
@@ -20,7 +22,6 @@ async function testDatabaseConnection() {
         console.error('Unable to connect to the database:', error);
         throw new ErrorConnectingToDatabaseError();
     }
-};
+}
 
 module.exports = sequelize;
-

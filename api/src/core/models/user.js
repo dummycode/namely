@@ -24,7 +24,7 @@ class User extends Model {
         this.removeAttribute('id');
 
         this.addHook('beforeSave', async (user) => {
-            return user.user_uuid = uuidv4();
+            return user.userUuid = uuidv4();
         });
 
         return this;

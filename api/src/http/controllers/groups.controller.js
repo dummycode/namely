@@ -1,20 +1,20 @@
 const { validationResult } = require('express-validator');
 
 const responder = require('../../core/responder');
-const nameGoggles = require('./goggles/name.goggles');
-const { NameNotFoundError } = require('../../core/errors');
+const groupGoggles = require('./goggles/group.goggles');
+const { GroupNotFoundError } = require('../../core/errors');
 const utils = require('../../core/utils');
-const nameFetcher = require('../../managers/name/fetcher');
-const nameCreator = require('../../managers/name/creator');
+const groupFetcher = require('../../managers/group/fetcher');
+const groupCreator = require('../../managers/group/creator');
 
 const index = async (req, res) => {
-    const fetchNamesRequest = {
-        createdBy: req.body.user.userUuid,
+    const fetchGroupsRequest = {
+        ownedBy: req.body.user.userUuid,
     };
 
-    nameFetcher.fetchAllByUser(fetchNamesRequest.createdBy)
-        .then((names) => {
-            responder.successResponse(res, { data: names.map(nameGoggles) } );
+    groupFetcher.fetchAllByUser(fetchGroupsRequest.ownedBy)
+        .then((groups) => {
+            responder.successResponse(res, { data: groups.map(groupGoggles) } );
         })
         .catch((err) => {
             switch (err.constructor) {
@@ -35,19 +35,19 @@ const fetch = (req, res) => {
         return;
     }
 
-    const fetchNameRequest = {
-        nameUuid: req.params.uuid,
-        createdBy: req.body.user.userUuid,
+    const fetchGroupRequest = {
+        groupUuid: req.params.uuid,
+        ownedBy: req.body.user.userUuid,
     };
 
-    nameFetcher.fetch(fetchNameRequest)
-        .then((name) => {
-            responder.successResponse(res, nameGoggles(name));
+    groupFetcher.fetch(fetchGroupRequest)
+        .then((group) => {
+            responder.successResponse(res, groupGoggles(group));
         })
         .catch((err) => {
             switch (err.constructor) {
-            case NameNotFoundError:
-                responder.notFoundResponse(res, 'Name not found');
+            case GroupNotFoundError:
+                responder.notFoundResponse(res, 'Group not found');
                 return;
             default:
                 utils.logError({ err, message: err.message });
@@ -66,16 +66,13 @@ const create = (req, res) => {
         return;
     }
 
-    const nameParts = req.body.name.split(" ");
-
-    const createNameRequest = {
-        first: nameParts[0],
-        last: nameParts.slice(1).join(" "),
-        createdBy: req.body.user.userUuid,
+    const createGroupRequest = {
+        title: req.body.title,
+        ownedBy: req.body.user.userUuid,
     };
 
-    nameCreator.create(createNameRequest).then((name) => {
-        responder.itemCreatedResponse(res, nameGoggles(name));
+    groupCreator.create(createGroupRequest).then((group) => {
+        responder.itemCreatedResponse(res, groupGoggles(group));
     });
 };
 
@@ -89,14 +86,14 @@ const remove = (req, res) => {
         return;
     }
 
-    nameFetcher.fetch(req.params.uuid)
-        .then((name) => {
-            responder.successResponse(res, nameGoggles(name));
+    groupFetcher.fetch(req.params.uuid)
+        .then((group) => {
+            responder.successResponse(res, groupGoggles(group));
         })
         .catch((err) => {
             switch (err.constructor) {
-            case NameNotFoundError:
-                responder.notFoundResponse(res, 'Name not found');
+            case GroupNotFoundError:
+                responder.notFoundResponse(res, 'Group not found');
                 return;
             default:
                 utils.logError({ err, message: err.message });

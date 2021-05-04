@@ -15,7 +15,14 @@ class Name extends Model {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+        console.log("NAME", models);
         // define association here
+        this.belongsToMany(models.Group, {
+            as: 'groups',
+            through: models.GroupNameMembership,
+            targetKey: 'groupUuid',
+            sourceKey: 'nameUuid',
+        });
     }
 
     static init(fields, sequelize) {
@@ -31,7 +38,7 @@ class Name extends Model {
     }
 };
 
-const name = Name.init(
+Name.init(
     {
         nameUuid: DataTypes.UUID,
         first: DataTypes.STRING,
@@ -45,4 +52,4 @@ const name = Name.init(
     }
 );
 
-module.exports = name;
+module.exports = Name;

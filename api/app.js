@@ -9,6 +9,9 @@ const config = require('./src/core/config');
 const indexRouter = require('./src/http/routes/index');
 const responder = require('./src/core/responder');
 
+const db = require('./src/core/models/index');
+db.sequelize.sync();
+
 const app = express();
 
 // view engine setup

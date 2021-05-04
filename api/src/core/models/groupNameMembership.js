@@ -1,7 +1,6 @@
 'use strict';
 
 const { v4: uuidv4 } = require('uuid');
-
 const {
     Model,
     DataTypes
@@ -9,7 +8,7 @@ const {
 
 const sequelize = require('../../core/sequelize');
 
-class FriendRequest extends Model {
+class GroupNameMembership extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -24,26 +23,22 @@ class FriendRequest extends Model {
 
         this.removeAttribute('id');
 
-        this.addHook('beforeSave', async (friendRequest) => {
-            return friendRequest.uuid = uuidv4();
-        });
-
         return this;
     }
 };
 
-const friendRequest = FriendRequest.init(
+const groupNameMembership = GroupNameMembership.init(
     {
-        uuid: DataTypes.UUID,
-        from: DataTypes.UUID,
-        to: DataTypes.UUID,
+        groupUuid: DataTypes.UUID,
+        nameUuid: DataTypes.UUID,
+        addedBy: DataTypes.UUID,
     },
     {
         sequelize,
-        modelName: 'FriendRequest',
+        modelName: 'Group',
         paranoid: true,
     }
 );
 
+module.exports = groupNameMembership;
 
-module.exports = user;

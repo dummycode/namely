@@ -6,6 +6,7 @@ const { NameNotFoundError } = require('../../core/errors');
 const utils = require('../../core/utils');
 const nameFetcher = require('../../managers/name/fetcher');
 const nameCreator = require('../../managers/name/creator');
+const nameRemover = require('../../managers/name/remover');
 
 const index = async (req, res) => {
     const fetchNamesRequest = {
@@ -89,9 +90,9 @@ const remove = (req, res) => {
         return;
     }
 
-    nameFetcher.fetch(req.params.uuid)
+    nameRemover.remove(req.params.uuid)
         .then((name) => {
-            responder.successResponse(res, nameGoggles(name));
+            responder.itemDeletedResponse(res, "Successfully deleted name");
         })
         .catch((err) => {
             switch (err.constructor) {

@@ -4,7 +4,7 @@ module.exports = {
             groupUuid: {
                 type: Sequelize.UUID,
                 allowNull: false,
-                references: { model: 'Names', key: 'nameUuid' },
+                references: { model: 'Groups', key: 'groupUuid' },
                 primaryKey: true,
             },
             nameUuid: {

@@ -1,7 +1,6 @@
-const abstractGoggles = require('./abstract.goggles');
+const { filterModel } = require('./abstract.goggles');
 
 module.exports = (name) => {
-    const rawName = name.get({ plain: true });
     const filter = ['nameUuid', 'first', 'last'];
-    return abstractGoggles(rawName, filter);
+    return filterModel(name, filter);
 };

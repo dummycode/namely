@@ -1,9 +1,18 @@
-module.exports = (object, filter) => {
-    let filtered = {}
-    for (const key in object) {
-        if (filter.includes(key)) {
-            filtered[key] = object[key]
+const filter = (object, allowList) => {
+    const filtered = {};
+
+    Object.keys(object).forEach((key) => {
+        if (allowList.includes(key)) {
+            filtered[key] = object[key];
         }
-    }
-    return filtered
-}
+    });
+
+    return filtered;
+};
+
+const filterModel = (object, allowList) => filter(object.get({ plain: true }), allowList);
+
+module.exports = {
+    filter,
+    filterModel,
+};

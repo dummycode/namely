@@ -17,7 +17,7 @@ exports.validate = (method) => {
     case 'remove': {
         return [
             param('uuid', validationError('uuid', '`uuid` is required')).exists(),
-            param('uuid', validationError('uuid', '`uuid` must be an integer')).isInt(),
+            param('uuid', validationError('uuid', '`uuid` must be an integer')).isUUID(),
         ];
     }
     default: {

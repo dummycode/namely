@@ -7,6 +7,7 @@ const {
 } = require('sequelize');
 
 const sequelize = require('../../core/sequelize');
+const Name = require('./name');
 
 class Group extends Model {
     /**
@@ -16,6 +17,13 @@ class Group extends Model {
      */
     static associate(models) {
         // define association here
+        this.hasMany(Name, {
+            as: 'names',
+            through: 'GroupNameMembership',
+            targetKey: "nameUuid",
+            sourceKey: "groupUuid",
+        });
+
     }
 
     static init(fields, sequelize) {
@@ -31,7 +39,7 @@ class Group extends Model {
     }
 };
 
-const group = Group.init(
+Group.init(
     {
         groupUuid: DataTypes.UUID,
         title: DataTypes.STRING,
@@ -44,4 +52,4 @@ const group = Group.init(
     }
 );
 
-module.exports = group;
+module.exports = Group;

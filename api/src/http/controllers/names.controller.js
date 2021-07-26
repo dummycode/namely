@@ -15,7 +15,7 @@ const index = async (req, res) => {
 
     nameFetcher.fetchAllByUser(fetchNamesRequest.createdBy)
         .then((names) => {
-            responder.successResponse(res, { data: names.map(nameGoggles) } );
+            responder.successResponse(res, { data: names.map(nameGoggles) });
         })
         .catch((err) => {
             switch (err.constructor) {
@@ -67,11 +67,11 @@ const create = (req, res) => {
         return;
     }
 
-    const nameParts = req.body.name.split(" ");
+    const nameParts = req.body.name.split(' ');
 
     const createNameRequest = {
         first: nameParts[0],
-        last: nameParts.slice(1).join(" "),
+        last: nameParts.slice(1).join(' '),
         createdBy: req.body.user.userUuid,
     };
 
@@ -91,8 +91,8 @@ const remove = (req, res) => {
     }
 
     nameRemover.remove(req.params.uuid)
-        .then((name) => {
-            responder.itemDeletedResponse(res, "Successfully deleted name");
+        .then(() => {
+            responder.itemDeletedResponse(res, 'Successfully deleted name');
         })
         .catch((err) => {
             switch (err.constructor) {

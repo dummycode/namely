@@ -6,7 +6,7 @@ const controller = require('../../controllers/names.controller');
 
 const { validate } = require('../../controllers/validators/names.validator');
 
-const { authenticate } = require('../../middleware/auth.middleware');
+const { authenticate } = require('../../middleware/auth');
 
 router.get('/', [authenticate], controller.index);
 router.get('/:uuid', [authenticate, validate('fetch')], controller.fetch);

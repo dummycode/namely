@@ -6,7 +6,7 @@ const Name = require('../../core/models/name');
 const Group = require('../../core/models/group');
 
 const fetchAllByUser = async (ownedBy) => {
-    return Sequelize.Group.findAll({ where: { ownedBy } });
+    return Group.findAll({ where: { ownedBy } });
 }
 
 const fetch = async (fetchGroupRequest) => {

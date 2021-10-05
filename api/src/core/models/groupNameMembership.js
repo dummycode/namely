@@ -35,7 +35,7 @@ const groupNameMembership = GroupNameMembership.init(
     },
     {
         sequelize,
-        modelName: 'Group',
+        modelName: 'GroupNameMembership',
         paranoid: true,
     }
 );

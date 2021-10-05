@@ -41,8 +41,7 @@ class Name extends Model {
 Name.init(
     {
         nameUuid: DataTypes.UUID,
-        first: DataTypes.STRING,
-        last: DataTypes.STRING,
+        name: DataTypes.STRING,
         createdBy: DataTypes.UUID,
     },
     {

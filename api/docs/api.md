@@ -36,7 +36,7 @@ POST /api/users
 }
 ```
 
-POST /api/login
+POST /api/auth/login
 ```
 {
     "username": "henry",
@@ -55,7 +55,7 @@ POST /api/login
 }
 ```
 
-GET /api/whoami
+GET /api/whoami secret-identity: "TOKEN"
 User
 ```
 {

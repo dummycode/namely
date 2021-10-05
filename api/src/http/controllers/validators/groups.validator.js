@@ -17,7 +17,7 @@ exports.validate = (method) => {
     case 'remove': {
         return [
             param('uuid', validationError('uuid', '`uuid` is required')).exists(),
-            param('uuid', validationError('uuid', '`uuid` must be an integer')).isInt(),
+            param('uuid', validationError('uuid', '`uuid` must be a UUID')).isUUID(),
         ];
     }
     case 'addMember': {
@@ -25,22 +25,22 @@ exports.validate = (method) => {
             body('groupId', validationError('groupId', '`groupId` is required')).exists(),
             body(
                 'groupId',
-                validationError('groupId', '`groupId` must be an integer'),
-            ).isInt(),
+                validationError('groupId', '`groupId` must be a UUID'),
+            ).isUUID(),
             body(
-                'contactId',
-                validationError('contactId', '`contactId` is required'),
+                'nameId',
+                validationError('nameId', '`nameId` is required'),
             ).exists(),
             body(
-                'contactId',
-                validationError('contactId', '`contactId` must be an integer'),
-            ).isInt(),
+                'nameId',
+                validationError('nameId', '`nameId` must be a UUID'),
+            ).isUUID(),
         ];
     }
     case 'removeMember': {
         return [
             param('id', validationError('id', '`id` is required')).exists(),
-            param('id', validationError('id', '`id` must be an integer')).isInt(),
+            param('id', validationError('id', '`id` must be an integer')).isUUID(),
         ];
     }
     default: {

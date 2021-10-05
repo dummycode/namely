@@ -67,11 +67,8 @@ const create = (req, res) => {
         return;
     }
 
-    const nameParts = req.body.name.split(' ');
-
     const createNameRequest = {
-        first: nameParts[0],
-        last: nameParts.slice(1).join(' '),
+        name: req.body.name,
         createdBy: req.body.user.userUuid,
     };
 

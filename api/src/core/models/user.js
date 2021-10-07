@@ -16,6 +16,12 @@ class User extends Model {
      */
     static associate(models) {
         // define association here
+
+        this.hasMany(models.Name, {
+            as: 'names',
+            foreignKey: 'createdBy',
+            sourceKey: 'userUuid',
+        });
     }
 
     static init(fields, sequelize) {
@@ -33,7 +39,10 @@ class User extends Model {
 
 const user = User.init(
     {
-        userUuid: DataTypes.UUID,
+        userUuid: {
+            type: DataTypes.UUID,
+            primaryKey: true,
+        },
         username: DataTypes.STRING,
         password: DataTypes.STRING,
         email: DataTypes.STRING,

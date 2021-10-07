@@ -3,13 +3,16 @@ const {
 } = require('../../core/errors');
 const Name = require('../../core/models/name');
 
-const Group = require('../../core/models/group');
+const db = require('../../core/models/index');
 
 const fetchAllByUser = async (ownedBy) => {
     return Group.findAll({ where: { ownedBy } });
 }
 
 const fetch = async (fetchGroupRequest) => {
+    const Group = db.Group;
+    console.log({ db, Group });
+
     const { groupUuid, ownedBy } = fetchGroupRequest
     const group = await Group.findOne({
         where: { groupUuid, ownedBy },

@@ -2,13 +2,14 @@ const {
     UserNotFoundError,
 } = require('../../core/errors');
 const User = require('../../core/models/user');
+const Name = require('../../core/models/name');
 
 const fetchAll = async () => {
     return User.findAll();
 }
 
 const fetch = async (uuid) => {
-    const user = await User.findOne({ where: { userUuid: uuid } });
+    const user = await User.findOne({ where: { userUuid: uuid }, include: [{ model: Name, as: 'names' }] });
     if (user === null) {
         throw new UserNotFoundError();
     }

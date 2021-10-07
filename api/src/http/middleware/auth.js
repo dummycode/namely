@@ -21,6 +21,7 @@ exports.authenticate = (req, res, next) => {
         // Otherwise, good to go
         userFetcher.fetch(decoded.uuid)
             .then((user) => {
+                console.log(user);
                 req.body.user = user.get({ plain: true });
                 return next();
             })

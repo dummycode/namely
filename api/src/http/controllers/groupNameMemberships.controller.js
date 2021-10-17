@@ -22,6 +22,12 @@ const create = (req, res) => {
 
     membershipCreator.create(createGroupNameMembershipRequest).then((membership) => {
         responder.itemCreatedResponse(res, membershipGoggles(membership));
+    }).catch((err) => {
+        switch (err.constructor) {
+        default:
+            console.log(err);
+            responder.ohShitResponse(res, { message: 'Unable to add name to group' });
+        }
     });
 };
 
@@ -36,4 +42,5 @@ const remove = (req, res) => {
 module.exports = {
     create,
     fetch,
+    remove,
 };

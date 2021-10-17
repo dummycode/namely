@@ -18,13 +18,12 @@ class Group extends Model {
      */
     static associate(models) {
         // define association here
-        console.log("TEST");
-        /*
         this.belongsToMany(models.Name, {
             as: 'names',
-            through: 'GroupNameMembership',
+            through: models.GroupNameMembership,
+            foreignKey: 'groupUuid',
+            otherKey: 'nameUuid',
         });
-        */
     }
 
     static init(fields, sequelize) {
@@ -42,7 +41,10 @@ class Group extends Model {
 
 const group = Group.init(
     {
-        groupUuid: DataTypes.UUID,
+        groupUuid: {
+            type: DataTypes.UUID,
+            primaryKey: true,
+        },
         title: DataTypes.STRING,
         ownedBy: DataTypes.UUID,
     },

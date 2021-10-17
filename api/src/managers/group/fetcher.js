@@ -11,9 +11,8 @@ const fetchAllByUser = async (ownedBy) => {
 
 const fetch = async (fetchGroupRequest) => {
     const Group = db.Group;
-    console.log({ db, Group });
 
-    const { groupUuid, ownedBy } = fetchGroupRequest
+    const { groupUuid, ownedBy } = fetchGroupRequest;
     const group = await Group.findOne({
         where: { groupUuid, ownedBy },
         include: [{ model: Name, as: "names" }]

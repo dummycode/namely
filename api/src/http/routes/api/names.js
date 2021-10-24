@@ -14,3 +14,4 @@ router.post('/', [authenticate, validate('create')], controller.create);
 router.delete('/:uuid', [authenticate, validate('remove')], controller.remove);
 
 module.exports = router;
+

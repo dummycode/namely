@@ -1,9 +1,9 @@
 module.exports = {
-    up: async (queryInterface, Sequelize) => {
+    up: async (queryInterface) => {
         await queryInterface.renameColumn('Names', 'first', 'name');
-        await queryInterface.removeColumn('Names', 'last');
+        await queryInterface.dropColumn('Names', 'last');
     },
-    down: async (queryInterface, Sequelize) => {
+    down: async (queryInterface) => {
         await queryInterface.renameColumn('Names', 'name', 'first');
     },
 };

@@ -9,20 +9,21 @@ const {
 const sequelize = require('../../core/sequelize');
 
 class Name extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+
     static associate(models) {
-        console.log("NAME", models);
-        // define association here
         this.belongsToMany(models.Group, {
             as: 'groups',
             through: models.GroupNameMembership,
             foreignKey: 'nameUuid',
             otherKey: 'groupUuid',
         });
+        this.belongsToMany(models.Location, {
+            as: 'locations',
+            through: models.LocationNameRelationship,
+            foreignKey: 'nameUuid',
+            otherKey: 'locationUuid',
+        });
+
     }
 
     static init(fields, sequelize) {

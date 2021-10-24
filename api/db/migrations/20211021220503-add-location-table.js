@@ -1,21 +1,20 @@
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        await queryInterface.createTable('GroupNameMemberships', {
-            groupUuid: {
+        await queryInterface.createTable('Locations', {
+            locationUuid: {
                 type: Sequelize.UUID,
+                defaultValue: Sequelize.UUIDV4,
                 allowNull: false,
-                references: { model: 'Groups', key: 'groupUuid' },
-                primaryKey: true,
+                unique: true,
             },
-            nameUuid: {
-                type: Sequelize.UUID,
+            name: {
+                type: Sequelize.STRING,
                 allowNull: false,
-                references: { model: 'Names', key: 'nameUuid' },
-                primaryKey: true,
             },
-            addedBy: {
+            createdBy: {
                 type: Sequelize.UUID,
                 allowNull: false,
+                references: { model: 'Users', key: 'userUuid' },
             },
             createdAt: {
                 type: Sequelize.DATE,
@@ -32,6 +31,6 @@ module.exports = {
         });
     },
     down: async (queryInterface, Sequelize) => {
-        await queryInterface.dropTable('GroupNameMemberships');
+        await queryInterface.dropTable('Locations');
     },
 };

@@ -4,12 +4,13 @@ const {
 const User = require('../../core/models/user');
 const Name = require('../../core/models/name');
 
-const fetchAll = async () => {
-    return User.findAll();
-}
+const fetchAll = async () => User.findAll();
 
 const fetch = async (uuid) => {
-    const user = await User.findOne({ where: { userUuid: uuid }, include: [{ model: Name, as: 'names' }] });
+    const user = await User.findOne({
+        where: { userUuid: uuid },
+        include: [{ model: Name, as: 'names' }]
+    });
     if (user === null) {
         throw new UserNotFoundError();
     }
@@ -24,11 +25,10 @@ const fetchByUsername = async (username) => {
     }
 
     return user;
-}
+};
 
 module.exports = {
     fetchAll,
     fetch,
     fetchByUsername,
 };
-

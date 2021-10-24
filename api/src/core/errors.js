@@ -24,6 +24,11 @@ exports.FriendRequestAlreadyExistsError = class FriendRequestAlreadyExistsError 
 exports.NameNotFoundError = class NameNotFoundError extends Error {};
 
 /**
+ * Location errors
+ */
+exports.LocationNotFoundError = class LocationNotFoundError extends Error {};
+
+/**
  * Validation errors
  */
 exports.ValidationFailedError = class ValidationFailedError extends Error {
@@ -42,3 +47,4 @@ exports.EncryptionFailedError = class EncryptionFailedError extends Error {};
  * Database errors
  */
 exports.ErrorConnectingToDatabaseError = class ErrorConnectingToDatabaseError extends Error {};
+

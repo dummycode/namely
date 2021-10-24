@@ -10,18 +10,13 @@ const Name = require('./name');
 
 const sequelize = require('../../core/sequelize');
 
-class Group extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+class Location extends Model {
+
     static associate(models) {
-        // define association here
         this.belongsToMany(models.Name, {
             as: 'names',
-            through: models.GroupNameMembership,
-            foreignKey: 'groupUuid',
+            through: models.LocationNameRelationship,
+            foreignKey: 'locationUuid',
             otherKey: 'nameUuid',
         });
     }
@@ -31,28 +26,28 @@ class Group extends Model {
 
         this.removeAttribute('id');
 
-        this.addHook('beforeSave', async (group) => {
-            return group.groupUuid = uuidv4();
+        this.addHook('beforeSave', async (loc) => {
+            return loc.locationUuid = uuidv4();
         });
 
         return this;
     }
 };
 
-const group = Group.init(
+const loc = Location.init(
     {
-        groupUuid: {
+        locationUuid: {
             type: DataTypes.UUID,
             primaryKey: true,
         },
         name: DataTypes.STRING,
-        ownedBy: DataTypes.UUID,
+        createdBy: DataTypes.UUID,
     },
     {
         sequelize,
-        modelName: 'Group',
+        modelName: 'Location',
         paranoid: true,
     }
 );
 
-module.exports = group;
+module.exports = loc;

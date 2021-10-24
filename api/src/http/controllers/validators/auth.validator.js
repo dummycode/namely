@@ -3,7 +3,7 @@ const { validationError } = require('../../../core/utils');
 
 exports.validate = (method) => {
     switch (method) {
-    case 'login': {
+    case 'create': {
         return [
             body(
                 'username',

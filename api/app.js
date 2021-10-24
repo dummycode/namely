@@ -39,6 +39,7 @@ const apiRoutes = {
     names: 'names',
     auth: 'auth',
     groups: 'groups',
+    locations: 'locations',
 };
 for (const [key, route] of Object.entries(apiRoutes)) {
     app.use(`/api/${route}`, require(`./src/http/routes/api/${key}`));

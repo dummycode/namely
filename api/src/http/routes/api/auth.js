@@ -4,7 +4,7 @@ const router = express.Router();
 
 const { validate } = require('../../controllers/validators/auth.validator');
 
-const controller = require('../../controllers/auth.controller');
+const controller = require('../../controllers/auth');
 
 router.post('/login', validate('login'), controller.login);
 

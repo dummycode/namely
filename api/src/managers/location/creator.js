@@ -1,4 +1,5 @@
 const database = require('../../core/database');
+const connection = database.getConnection();
 
 const Location = require('../../core/models/location');
 

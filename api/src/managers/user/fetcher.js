@@ -9,8 +9,8 @@ const fetchAll = async () => User.findAll();
 const fetch = async (uuid) => {
     const user = await User.findOne({
         where: { userUuid: uuid },
-        include: [{ model: Name, as: 'names' }]
     });
+
     if (user === null) {
         throw new UserNotFoundError();
     }

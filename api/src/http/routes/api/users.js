@@ -4,7 +4,7 @@ var router = express.Router()
 var { validate } = require('../../controllers/validators/users.validator')
 var { authenticate, isAdmin } = require('../../middleware/auth')
 
-var controller = require('../../controllers/users.controller')
+var controller = require('../../controllers/users')
 
 router.get('/', [authenticate, isAdmin], controller.index)
 router.get('/:uuid', validate('fetch'), controller.fetch)

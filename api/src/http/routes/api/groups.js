@@ -2,8 +2,8 @@ const express = require('express');
 
 const router = express.Router();
 
-const controller = require('../../controllers/groups.controller');
-const groupMembershipsController = require('../../controllers/groupNameMemberships.controller');
+const controller = require('../../controllers/groups');
+const groupMembershipController = require('../../controllers/groupNameMemberships');
 
 const { validate } = require('../../controllers/validators/groups.validator');
 
